@@ -23,7 +23,7 @@
 #  DISCLAIMER: This script is provided as-is and as such is unsupported.
 #
 
-hostname=`hostname`
+hostname=oscar
 
 case $hostname in
    gaea5? | c5n* )
@@ -203,6 +203,32 @@ case $hostname in
        export LD=mpif90
        export TEMPLATE=site/gnu.mk
        export LAUNCHER="mpirun -tag-output"
+
+       # highest level of AVX support
+       export AVX_LEVEL=-march=native
+
+       echo -e ' '
+       module list
+       ;;
+   oscar* )
+       echo " oscar environment "
+
+#       source $MODULESHOME/init/sh
+       module load hpcx-mpi/4.1.5rc2s
+       module load netcdf-mpi/4.9.2
+       module load libyaml/0.2.5
+
+       export CPATH="${NETCDF}/include:${CPATH}"
+       export NETCDF_DIR=${NETCDF}
+       export FMS_CPPDEFS=""
+
+       # make your compiler selections here
+       export FC=mpif90
+       export CC=mpicc
+       export CXX=mpicxx
+       export LD=mpif90
+       export TEMPLATE=site/gnu.mk
+       export LAUNCHER="srun --mpi=pmix"
 
        # highest level of AVX support
        export AVX_LEVEL=-march=native
