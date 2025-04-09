@@ -87,7 +87,8 @@ CFLAGS_DEBUG = -O0 -ggdb -g
 
 # Optional Testing compile flags.  Mutually exclusive from DEBUG, REPRO, and OPT
 # *_TEST will match the production if no new option(s) is(are) to be tested.
-FFLAGS_TEST = -O3 -debug minimal -fp-model source -qoverride-limits
+#FFLAGS_TEST = -O3 -debug minimal -fp-model source -qoverride-limits
+FFLAGS_TEST = -O3 
 CFLAGS_TEST = -O2
 
 LDFLAGS := -L/usr/lib
